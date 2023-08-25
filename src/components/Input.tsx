@@ -1,4 +1,5 @@
 import { TextInput, View } from "react-native"
+import { inputsStyle } from "../styles"
 
 export interface InputProps {
     placeholder?: string,
@@ -7,10 +8,10 @@ export interface InputProps {
 }
 
 export default function Input(props: InputProps) {
-    const text_aling = "text-" + props.direction || "start"
+    const text_align = props.direction || "start"
     return (
-        <View className="bg-gray-400 w-full -z-10 rounded-2xl px-2 py-4">
-            <TextInput className={`w-full text-base color-gray-700 ${text_aling}`} onChangeText={(e) => props.setValue(e)} placeholder={props.placeholder} />
+        <View style={[inputsStyle.body]}>
+            <TextInput style={[inputsStyle.text]} onChangeText={(e) => props.setValue(e)} placeholder={props.placeholder} />
         </View>
     )
 }

@@ -1,3 +1,4 @@
+import { buttonsStyle, colors, textsStyle } from "../styles"
 import { TouchableOpacity, Text, View } from "react-native"
 
 export interface ButtonProps {
@@ -19,9 +20,14 @@ export default function Button(props: ButtonProps) {
         :
         props.isHover? "green-200" : "green-700"
     return (
-        <TouchableOpacity className={`relative -z-10 w-full rounded-xl px-4 py-4 ${"bg-"+colorBg} items-center shadow-md ${"shadow-"+colorText}`}>
-            <View className="absolute left-4 bottom-4">{props.children}</View>
-            <Text className={`w-full ${"text-"+colorText} text-center text-base`}>{props.text}</Text>
+        <TouchableOpacity
+            style={[buttonsStyle.button_full, {backgroundColor: colors[colorBg]}]}
+            activeOpacity={0.8}
+            onPress={() => props.onPress()}
+        >
+            <View style={buttonsStyle.button_children}>{props.children}</View>
+            <Text style={[textsStyle.subtitle_2, {color: colors[colorText]}]}>{props.text}</Text>
         </TouchableOpacity>
     )
+
 }
