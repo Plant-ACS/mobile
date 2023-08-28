@@ -9,7 +9,8 @@ export const buttonsStyle = StyleSheet.create({
     borderRadius: 15,
     paddingHorizontal: 10,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: 20,
   },
   button_children: {
     position: "absolute",
