@@ -18,6 +18,12 @@ export const textsStyle = StyleSheet.create({
     color: colors["black-900"],
   },
 
+  label: {
+    fontSize: 22.5,
+    fontWeight: "300",
+    color: colors["black-900"]
+  },
+
   subtitle: {
     fontSize: 26,
     fontWeight: "300",

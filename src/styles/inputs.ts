@@ -11,6 +11,7 @@ export const inputsStyle = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: colors["gray-400"],
+    marginBottom: 15,
   },
   select_box: {
     position: "relative",
