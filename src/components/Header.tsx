@@ -7,14 +7,15 @@ export interface HeaderProps {
 
 export default function Header(props: HeaderProps) {
   return(
-    <View style={{
+    <View style={[{
+      width: "100%",
       backgroundColor: "#F0F0F0",
       paddingHorizontal: 20,
-      paddingTop: 15,
+      paddingTop: 10,
       paddingBottom: 22,
       borderBottomStartRadius: 30,
       borderBottomEndRadius: 30,
-    }}>
+    }, props.style]}>
       {props.children}
     </View>
   )
