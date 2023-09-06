@@ -34,5 +34,9 @@ export const buttonsStyle = StyleSheet.create({
   selectBox_dropBox: {
     position: "absolute",
     top: 10,
+    zIndex: 10,
+    width: 30,
+    height: "auto",
+    backgroundColor: colors["yellow-800"],
   }
 })
