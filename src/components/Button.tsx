@@ -23,7 +23,7 @@ export default function Button(props: ButtonProps) {
         <TouchableOpacity
             style={[buttonsStyle.button_full, {backgroundColor: colors[colorBg]}]}
             activeOpacity={0.8}
-            onPress={() => props.onPress()}
+            onPress={props.onPress}
         >
             <View style={buttonsStyle.button_children}>{props.children}</View>
             <Text style={[textsStyle.subtitle_2, {color: colors[colorText]}]}>{props.text}</Text>
