@@ -65,5 +65,9 @@ export const textsStyle = StyleSheet.create({
     fontFamily: "Quicksand",
     color: colors["blue-500"],
     fontWeight: "200",
+  }, 
+  
+  bold: {
+    fontFamily: "Quicksand-Bold",
   }
 })
