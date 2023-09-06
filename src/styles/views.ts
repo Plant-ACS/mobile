@@ -1,5 +1,4 @@
 import { StyleSheet } from 'react-native'
-import { colors } from '.'
 
 export const viewsStyle = StyleSheet.create({
   form: {
@@ -19,5 +18,10 @@ export const viewsStyle = StyleSheet.create({
   group_buttons: {
     justifyContent: 'space-between',
     width: '100%',
+  },
+  content: {
+    flex: 1,
+    paddingHorizontal: 30,
+    marginVertical: 30,
   }
 })
