@@ -5,6 +5,7 @@ import { colors } from './src/styles'
 import Home from '@pages/Home'
 import { useFonts } from "expo-font"
 import { hideAsync, preventAutoHideAsync } from 'expo-splash-screen'
+import SelectACS from '@pages/SelectACS'
 
 preventAutoHideAsync();
 export default function App() {
@@ -31,7 +32,7 @@ export default function App() {
         paddingTop: 38,
         backgroundColor: colors["white-900"],
       }}>
-        <Home />
+        <SelectACS />
       </View>
     </>
   );
