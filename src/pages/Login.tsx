@@ -2,9 +2,9 @@ import { Text, View } from "react-native"
 import Button from "@components/Button"
 import Input from "@components/Input"
 import { MaterialIcons } from "@expo/vector-icons"
-import { separatorsStyles, textsStyle, viewsStyle } from "../styles"
+import { textsStyle, viewsStyle } from "../styles"
 
-export default function RegisterPage(){
+export default function Login() {
     return(
         <View style={viewsStyle.form}>
             <Text style={textsStyle.subtitle_3}>Intelligreen</Text>
