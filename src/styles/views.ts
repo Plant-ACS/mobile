@@ -22,7 +22,6 @@ export const viewsStyle = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 30,
-    marginVertical: 30,
-    alignItems: "center"
+    marginVertical: 30
   }
 })

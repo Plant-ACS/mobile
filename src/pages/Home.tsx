@@ -8,10 +8,10 @@ import { colors } from "@styles/colors";
 import { viewsStyle } from "@styles/views";
 import ListView from "@components/ListView";
 import Card from "@components/Card";
-import { IACS } from "../types";
+import { IACS, PageProps } from "../types";
 import FloatButton from "@components/FloatButton";
 
-export default function Home() {
+export default function Home({ navigation }: PageProps) {
   const [hours, setHours] = useState<number>(0);
   const [acs, setAcs] = useState<Array<IACS>>();
 
@@ -81,7 +81,7 @@ export default function Home() {
         ))}
       </ListView>
 
-      <FloatButton icon="add" />
+      <FloatButton icon="add" onPress={() => navigation.navigate("Select_ACS")} />
     </>
   );
 }
