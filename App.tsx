@@ -11,11 +11,8 @@ import { hideAsync, preventAutoHideAsync } from "expo-splash-screen";
 import { colors } from "./src/styles";
 
 import Home from "@pages/Home";
-<<<<<<< HEAD
 import Login from "@pages/Login";
 import SelectACS from "@pages/SelectACS";
-=======
->>>>>>> e2be88b981cf0d41bf1078d1a24827ccd0779522
 
 preventAutoHideAsync();
 const Stack = createNativeStackNavigator();
@@ -39,10 +36,7 @@ export default function App() {
           initialRouteName="Home"
           screenOptions={{
             headerShown: false,
-<<<<<<< HEAD
             animation: 'none', 
-=======
->>>>>>> e2be88b981cf0d41bf1078d1a24827ccd0779522
             contentStyle: {
               flex: 1,
               width: "100%",
@@ -52,13 +46,9 @@ export default function App() {
             },
           }}
         >
-<<<<<<< HEAD
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Select_ACS" component={SelectACS} />
-=======
-          <Stack.Screen name="Home" component={Home} />
->>>>>>> e2be88b981cf0d41bf1078d1a24827ccd0779522
         </Stack.Navigator>
       </NavigationContainer>
     </>
