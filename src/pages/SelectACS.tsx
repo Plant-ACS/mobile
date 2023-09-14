@@ -32,7 +32,7 @@ const pulseStyle = StyleSheet.create({
 export default function SelectACS() {
   return(
     <>
-    <View style={viewsStyle.content}>
+    <View style={[viewsStyle.content, { alignItems: "center" }]}>
       <Pulse style={[ pulseStyle.view, pulseStyle.animation]} delay={0} />
       <Pulse style={[ pulseStyle.view, pulseStyle.animation]} delay={100} />
       <Pulse style={[ pulseStyle.view, pulseStyle.animation]} delay={500} />
