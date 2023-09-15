@@ -13,6 +13,7 @@ import { colors } from "./src/styles";
 import Home from "@pages/Home";
 import Login from "@pages/Login";
 import SelectACS from "@pages/SelectACS";
+import SelectWifi from "@pages/SelectWifi";
 
 preventAutoHideAsync();
 const Stack = createNativeStackNavigator();
@@ -49,6 +50,7 @@ export default function App() {
           <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Select_ACS" component={SelectACS} />
+          <Stack.Screen name="Select_Wifi" component={SelectWifi} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

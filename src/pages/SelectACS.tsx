@@ -5,6 +5,7 @@ import Pulse from "@components/animated/Pulse"
 import ListView from "@components/ListView"
 import Card from "@components/Card"
 import FloatButton from "@components/FloatButton"
+import { PageProps } from "../types"
 
 const pulseStyle = StyleSheet.create({
   animation: {
@@ -29,7 +30,7 @@ const pulseStyle = StyleSheet.create({
   }
 })
 
-export default function SelectACS() {
+export default function SelectACS({navigation}:PageProps) {
   return(
     <>
     <View style={[viewsStyle.content, { alignItems: "center" }]}>
@@ -46,7 +47,7 @@ export default function SelectACS() {
           <Card style={{ paddingVertical: 10 }}><Text style={textsStyle.subtitle_2}>Bluetooth's</Text></Card>
         </ListView>
     </View>
-    <FloatButton icon="link" theme="secondary" />
+    <FloatButton icon="link" theme="secondary" onPress={() => navigation.navigate("Select_Wifi")} />
     </>
   )
 }
