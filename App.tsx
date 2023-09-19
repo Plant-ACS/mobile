@@ -32,13 +32,13 @@ export default function App() {
 
   return (
     <>
-       <StatusBar style="dark" backgroundColor="#F0F0F0" />
+      {/* <StatusBar style="dark" backgroundColor="#F0F0F0" />
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Home"
           screenOptions={{
             headerShown: false,
-            animation: 'none', 
+            animation: 'none',
             contentStyle: {
               flex: 1,
               width: "100%",
@@ -54,7 +54,8 @@ export default function App() {
           <Stack.Screen name="Select_Wifi" component={SelectWifi} />
           <Stack.Screen name="Settings_Plantation" component={SettingsPlantation} />
         </Stack.Navigator>
-      </NavigationContainer> 
+      </NavigationContainer> */}
+      <Login></Login>
     </>
   );
 }
