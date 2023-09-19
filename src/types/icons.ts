@@ -1,1 +1,1 @@
-export type Icons = "keyboard-arrow-down" | "done-outline" | "add" | "link"
+export type Icons = "keyboard-arrow-down" | "done-outline" | "add" | "link" | "navigate-next"
