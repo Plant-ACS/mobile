@@ -14,6 +14,7 @@ import Home from "@pages/Home";
 import Login from "@pages/Login";
 import SelectACS from "@pages/SelectACS";
 import SelectWifi from "@pages/SelectWifi";
+import SettingsPlantation from "@pages/SettingPlantation";
 
 preventAutoHideAsync();
 const Stack = createNativeStackNavigator();
@@ -31,7 +32,7 @@ export default function App() {
 
   return (
     <>
-      <StatusBar style="dark" backgroundColor="#F0F0F0" />
+       <StatusBar style="dark" backgroundColor="#F0F0F0" />
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Home"
@@ -51,8 +52,9 @@ export default function App() {
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Select_ACS" component={SelectACS} />
           <Stack.Screen name="Select_Wifi" component={SelectWifi} />
+          <Stack.Screen name="Settings_Plantation" component={SettingsPlantation} />
         </Stack.Navigator>
-      </NavigationContainer>
+      </NavigationContainer> 
     </>
   );
 }
