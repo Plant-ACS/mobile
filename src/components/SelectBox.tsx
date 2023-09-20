@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { View, Text, TouchableOpacity } from "react-native"
 import { MaterialIcons } from "@expo/vector-icons"
-import { buttonsStyle, inputsStyle } from "../styles"
+import { buttonsStyle, colors, inputsStyle } from "../styles"
+import ListView from "./ListView";
 
 export interface SelectBoxProps {
   default?: number;
@@ -19,26 +20,29 @@ export default function SelectBox(props: SelectBoxProps) {
 
   console.log(props.direction)
 
+  const positionFloat = props.direction === "left"? { right: 0 } : { left: 0 }
+
   const btn = (
     <TouchableOpacity
       onPress={() => SetOpened(!isOpened)}
-      style={[buttonsStyle.selectBox_dropBox, {left: props.direction === "right"? "auto" : 10, right: props.direction === "left"? "auto" : 10}]}
+      style={[buttonsStyle.selectBox_btn, positionFloat,]}
     >
       <MaterialIcons name="keyboard-arrow-down" size={30} color={"#3F3D3B"} />
     </TouchableOpacity>
   );
   return (
     <>
-      <View style={[inputsStyle.body, inputsStyle.select_box]}>
+      <View style={[inputsStyle.body, inputsStyle.select_box, {zIndex: 1000}]}>
         { btn }
         <Text style={[inputsStyle.text, {textAlign: props.direction}]}>
           { props.options[value] || props.placeholder }
         </Text>
         { isOpened && (
-          <View>
+          <ListView style={buttonsStyle.selectBox_dropBox}>
             { props.options.map((option, key) => (
               <TouchableOpacity
                 key={key}
+                style={buttonsStyle.selectBox_option}
                 onPress={() => {
                   setValue(key);
                   props.setValue(key, option);
@@ -47,13 +51,13 @@ export default function SelectBox(props: SelectBoxProps) {
               >
                 { 
                   typeof option === "string"?
-                    <Text>{option}</Text>
+                    <Text style={buttonsStyle.selectBox_option_label}>{option}</Text>
                   :
                     option
                 }
               </TouchableOpacity>
             )) }
-          </View>
+          </ListView>
         ) }
       </View>
     </>
