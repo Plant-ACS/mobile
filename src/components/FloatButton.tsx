@@ -18,12 +18,12 @@ export default function FloatButton(props: FloatButtonProps) {
         bottom: 25,
         right: 30,
         padding: 5,
-        backgroundColor: theme === "primary" ? colors["green-700"] : colors["blue-700"],
+        backgroundColor: theme === "primary" ? colors["green-200"] : colors["blue-200"],
         borderRadius: 18,
       }}
       activeOpacity={0.6}
     >
-      <MaterialIcons name={props.icon} size={50} color={theme === "primary" ? colors["green-200"] : colors["blue-200"]} />
+      <MaterialIcons name={props.icon} size={50} color={theme === "primary" ? colors["green-700"] : colors["blue-700"]} />
     </TouchableOpacity>
   );
 }
