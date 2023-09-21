@@ -15,7 +15,8 @@ import Login from "@pages/Login";
 import SelectACS from "@pages/SelectACS";
 import SelectWifi from "@pages/SelectWifi";
 import SettingsPlantation from "@pages/SettingPlantation";
-
+import SettingsDevice from "@pages/SettingsDevice";
+import CalibratingSensors from "@pages/CalibratingSensors";
 preventAutoHideAsync();
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -32,7 +33,7 @@ export default function App() {
 
   return (
     <>
-      {/* <StatusBar style="dark" backgroundColor="#F0F0F0" />
+      <StatusBar style="dark" backgroundColor="#F0F0F0" />
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Home"
@@ -53,9 +54,10 @@ export default function App() {
           <Stack.Screen name="Select_ACS" component={SelectACS} />
           <Stack.Screen name="Select_Wifi" component={SelectWifi} />
           <Stack.Screen name="Settings_Plantation" component={SettingsPlantation} />
+          <Stack.Screen name="Settings_Device" component={SettingsDevice} />
+          <Stack.Screen name="Calibating_Sensors" component={CalibratingSensors} />
         </Stack.Navigator>
-      </NavigationContainer> */}
-      <Login></Login>
+      </NavigationContainer>
     </>
   );
 }
