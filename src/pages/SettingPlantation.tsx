@@ -10,6 +10,7 @@ import { Text, View } from "react-native";
 
 export default function SettingsPlantation() {
     return (
+        <>
         <View style={[viewsStyle.form, { position: "absolute", top: 190 }]}>
             <View style={[viewsStyle.group_inputs]}>
                 <Text style={textsStyle.subtitle}>Qual é o tipo de plantação</Text>
@@ -29,9 +30,8 @@ export default function SettingsPlantation() {
             </View>
 
 
-            <View style={[viewsStyle.group_buttons, {top : -210, marginEnd : -78}]}>
-                <FloatButton theme="secondary" icon="navigate-next" onPress={() => console.log("")} />
-            </View>
         </View>
+        <FloatButton theme="secondary" icon="navigate-next" onPress={() => console.log("")} />
+        </>
     );
 }

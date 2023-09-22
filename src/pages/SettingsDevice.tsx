@@ -8,22 +8,18 @@ import HumiditySensor from '@components/sensors/HumiditySensor';
 import LuminositySensor from '@components/sensors/LuminositySensor';
 export default function SettingsDevice() {
     return (
-        <View style={[viewsStyle.form]}>
-            <View style={[inputsStyle.text, { top: 200, marginLeft: 50 }]}>
+        <>
+        <View style={[viewsStyle.form, {justifyContent: "space-around"}]}>
+            <View style={{width: "90%", flexDirection: "row", alignItems: "center", gap: 20, marginLeft: -50}}>
+                <HumiditySensor />
                 <Input setValue={(value) => console.log(value)} />
-                <View style={{ marginLeft: -50, top: -80 }}>
-                    <HumiditySensor />
-                </View>
             </View>
-            <View style={[inputsStyle.text, { bottom: 50, marginLeft: 50 }]}>
-                <Input setValue={(value) => console.log(value)} />
-                <View style={{ marginLeft: -60, top: -80 }}>
+            <View style={{width: "80%", flexDirection: "row", alignItems: "center", gap: 20, marginLeft: -70}}>
                     <LuminositySensor />
-                </View>
-            </View>
-            <View style={[buttonsStyle.button_full, { marginLeft: 70 }]}>
-                <FloatButton icon='navigate-next' theme='secondary' />
+                <Input setValue={(value) => console.log(value)} />
             </View>
         </View>
+        <FloatButton icon='navigate-next' theme='secondary' />
+        </>
     );
 }
