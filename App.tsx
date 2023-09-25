@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
+import Constants from "expo-constants";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
@@ -33,10 +34,10 @@ export default function App() {
 
   return (
     <>
-      <StatusBar style="dark" backgroundColor="#F0F0F0" />
+      <StatusBar style="dark" backgroundColor="#F0F0F0" translucent />
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="Settings_Plantation"
           screenOptions={{
             headerShown: false,
             animation: 'none',
@@ -44,7 +45,7 @@ export default function App() {
               flex: 1,
               width: "100%",
               height: "100%",
-              paddingTop: 38,
+              marginTop: Constants.statusBarHeight,
               backgroundColor: colors["white-900"],
             },
           }}
