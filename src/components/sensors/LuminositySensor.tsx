@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import { SvgXml } from 'react-native-svg';
 
-const luminosity = `<svg width="58" height="87" viewBox="0 0 58 87" fill="none" xmlns="http://www.w3.org/2000/svg">
+const luminosity = `<svg width="37" height="87" viewBox="0 0 58 87" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M37.6567 30.6551C37.6567 30.6551 37.6567 50.8514 37.6567 62.2118C37.6567 65.5299 42.9172 65.5658 42.9172 68.8838C42.9172 74.4739 42.9172 84.0311 42.9172 84.0311" stroke="#7E7070" stroke-width="1.80324" stroke-linecap="round"/>
 <line x1="17.8459" y1="31.5628" x2="17.4975" y2="82.7749" stroke="#7E7070" stroke-width="1.80324" stroke-linecap="round"/>
 <g filter="url(#filter0_d_341_510)">
@@ -26,7 +26,7 @@ const luminosity = `<svg width="58" height="87" viewBox="0 0 58 87" fill="none" 
 export default function HumiditySensor() {
     return (
       <View>
-        <SvgXml xml={luminosity} width='58px' height="87px" />
+        <SvgXml xml={luminosity} width='37px' height="88px" />
       </View>
     );
   }
