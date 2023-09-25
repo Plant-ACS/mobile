@@ -15,7 +15,7 @@ export default function FloatButton(props: FloatButtonProps) {
       onPress={props.onPress}
       style={{
         position: "absolute",
-        bottom: 25,
+        bottom: 50,
         right: 30,
         padding: 5,
         backgroundColor: theme === "primary" ? colors["green-200"] : colors["blue-200"],
