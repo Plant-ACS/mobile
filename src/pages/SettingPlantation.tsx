@@ -2,7 +2,6 @@ import CheckButton from "@components/CheckButton";
 import FloatButton from "@components/FloatButton";
 import Input from "@components/Input";
 import SelectBox from "@components/SelectBox";
-import { MaterialIcons } from "@expo/vector-icons";
 import { buttonsStyle } from "@styles/buttons";
 import { textsStyle } from "@styles/texts";
 import { viewsStyle } from "@styles/views";
@@ -17,7 +16,7 @@ export default function SettingsPlantation() {
                 <SelectBox options={["Horta", "Lavoura", "Orquidário"]} placeholder="Horta" direction="left" setValue={() => console.log("oi")}></SelectBox>
 
                 <Text style={textsStyle.label}>Quantos ciclos de rega/dia</Text>
-                <Input placeholder="0" setValue={(value) => console.log(value)} />
+                <Input type="numeric" placeholder="0" setValue={(value) => console.log(value)} />
 
                 <Text style={[textsStyle.subtitle_3, {top: 35, marginEnd : -60 }]}>Irrigação inteligente</Text>
                 <Text style={[textsStyle.subtitle_3, {top: 60, marginEnd : 30 }]}>Notificação periódica de status</Text>
