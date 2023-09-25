@@ -11,7 +11,7 @@ export default function Header(props: HeaderProps) {
       width: "100%",
       backgroundColor: "#F0F0F0",
       paddingHorizontal: 20,
-      paddingTop: 10,
+      paddingTop: 60,
       paddingBottom: 22,
       borderBottomStartRadius: 30,
       borderBottomEndRadius: 30,
