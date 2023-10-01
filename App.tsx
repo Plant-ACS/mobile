@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import { Platform, View } from "react-native";
+import { useState } from "react";
 import Constants from "expo-constants";
 
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -7,7 +6,6 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { useFonts } from "expo-font";
 import { StatusBar } from "expo-status-bar";
-import { hideAsync, preventAutoHideAsync } from "expo-splash-screen";
 
 import { colors } from "./src/styles";
 
@@ -18,26 +16,24 @@ import SelectWifi from "@pages/SelectWifi";
 import SettingsPlantation from "@pages/SettingPlantation";
 import SettingsDevice from "@pages/SettingsDevice";
 import CalibratingSensors from "@pages/CalibratingSensors";
-preventAutoHideAsync();
+import Splash from "@pages/Splash";
+
 const Stack = createNativeStackNavigator();
 export default function App() {
-  const [fontsLoaded] = useFonts({
+  const [completeSplash, setCompleteSplash] = useState<boolean>(false);
+  useFonts({
     Quicksand: require("./assets/fonts/Quicksand.ttf"),
     "Quicksand-Bold": require("./assets/fonts/Quicksand_Bold.otf"),
   });
+  
+  return !completeSplash ? <Splash complete={setCompleteSplash} /> :
 
-  useEffect(() => {
-    if (fontsLoaded) hideAsync();
-  }, [fontsLoaded]);
-
-  if (!fontsLoaded) return null;
-
-  return (
+  (
     <>
       <StatusBar style="dark" backgroundColor="#F0F0F0" translucent />
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Settings_Plantation"
+          initialRouteName="Home"
           screenOptions={{
             headerShown: false,
             animation: 'none',
