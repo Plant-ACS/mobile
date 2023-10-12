@@ -17,23 +17,25 @@ import SettingsPlantation from "@pages/SettingPlantation";
 import SettingsDevice from "@pages/SettingsDevice";
 import CalibratingSensors from "@pages/CalibratingSensors";
 import Splash from "@pages/Splash";
+import Register from "@pages/Register";
+import Loader from "@pages/Loader";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
   const [completeSplash, setCompleteSplash] = useState<boolean>(false);
-  useFonts({
+  const [fontLoaded] = useFonts({
     Quicksand: require("./assets/fonts/Quicksand.ttf"),
     "Quicksand-Bold": require("./assets/fonts/Quicksand_Bold.otf"),
   });
   
-  return !completeSplash ? <Splash complete={setCompleteSplash} /> :
+  return !completeSplash || !fontLoaded ? <Splash complete={setCompleteSplash} /> :
 
   (
     <>
       <StatusBar style="dark" backgroundColor="#F0F0F0" translucent />
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Home"
+          initialRouteName="Login"
           screenOptions={{
             headerShown: false,
             animation: 'none',
@@ -47,6 +49,8 @@ export default function App() {
           }}
         >
           <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="Loader" component={Loader} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="Select_ACS" component={SelectACS} />
           <Stack.Screen name="Select_Wifi" component={SelectWifi} />
