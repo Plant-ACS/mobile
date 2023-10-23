@@ -35,7 +35,7 @@ export default function App() {
       <StatusBar style="dark" backgroundColor="#F0F0F0" translucent />
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="Login"
+          initialRouteName="Select_ACS"
           screenOptions={{
             headerShown: false,
             animation: 'none',

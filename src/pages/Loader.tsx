@@ -35,7 +35,7 @@ export default function Loader({route, navigation}: LoaderProps) {
     }}>
       {
         route.params?.name &&
-        <LottieView autoPlay loop={true} source={require(`../../assets/animation/${route.params.name}.json`)} />
+        <LottieView autoPlay loop={true} source={require(`../../assets/animation/plant-load.json`)} />
       }
       <Text style={textsStyle.subtitle}>Carregando Informações...</Text>
     </View>

@@ -6,6 +6,9 @@ import ListView from "@components/ListView"
 import Card from "@components/Card"
 import FloatButton from "@components/FloatButton"
 import { PageProps } from "../types"
+import { ScannBluetooths } from "../configs/Bluetooth"
+
+ScannBluetooths()
 
 const pulseStyle = StyleSheet.create({
   animation: {
@@ -30,7 +33,9 @@ const pulseStyle = StyleSheet.create({
   }
 })
 
+
 export default function SelectACS({navigation}:PageProps) {
+
   return(
     <>
     <View style={[viewsStyle.content, { alignItems: "center" }]}>
