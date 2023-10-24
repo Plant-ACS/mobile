@@ -81,9 +81,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.anonymus.mobile'
+    namespace 'tech.intelligreen.mobile'
     defaultConfig {
-        applicationId 'com.anonymus.mobile'
+        applicationId 'tech.intelligreen.mobile'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

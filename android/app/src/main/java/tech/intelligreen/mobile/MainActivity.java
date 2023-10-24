@@ -1,4 +1,4 @@
-package com.anonymus.mobile;
+package tech.intelligreen.mobile;
 
 import android.os.Build;
 import android.os.Bundle;
