@@ -8,7 +8,7 @@ export function ScannBluetooths(){
     bleManager.startDeviceScan(
         null, null,
         (error,devices) =>{
-            console.log(devices)
+            console.log(devices?.name)
         }
     )
 }
