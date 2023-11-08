@@ -6,9 +6,10 @@ import ListView from "@components/ListView"
 import Card from "@components/Card"
 import FloatButton from "@components/FloatButton"
 import { PageProps } from "../types"
-import { ScannBluetooths } from "../configs/Bluetooth"
+import { ScanBluetooths } from "../configs/Bluetooth"
+import { useEffect, useState } from "react"
+import { Device } from "react-native-ble-plx"
 
-ScannBluetooths()
 
 const pulseStyle = StyleSheet.create({
   animation: {
@@ -35,9 +36,14 @@ const pulseStyle = StyleSheet.create({
 
 
 export default function SelectACS({navigation}:PageProps) {
+  const [devices, setDevices] = useState<Array<Device>>([])
+
+  useEffect(() => {
+    ScanBluetooths(devices, setDevices)
+    console.log(devices.map(device => device.name))
+  }, [])
 
   return(
-    <>
     <View style={[viewsStyle.content, { alignItems: "center" }]}>
       <Pulse style={[ pulseStyle.view, pulseStyle.animation]} delay={0} />
       <Pulse style={[ pulseStyle.view, pulseStyle.animation]} delay={100} />
@@ -49,10 +55,23 @@ export default function SelectACS({navigation}:PageProps) {
           <MaterialIcons name="memory" size={50} color={colors["green-500"]} />
       </View>
         <ListView style={{ marginTop: 120, width: "85%" }}>
-          <Card style={{ paddingVertical: 10 }}><Text style={textsStyle.subtitle_2}>Bluetooth's</Text></Card>
+          {
+            devices.length === 0 &&
+              <Card style={{ paddingVertical: 10, marginBottom: 20, backgroundColor: colors["white-900"] }} opacity={0.6}>
+                <Text style={textsStyle.subtitle_2}>Buscando dispositivos...</Text>
+              </Card>
+          }
+          {
+            devices.map((device, index) =>
+              <Card key={index} style={{ paddingVertical: 10, marginBottom: 20 }} opacity={0.5} onPress={() => {
+                device.connect()
+                navigation.navigate("Loader", { device })
+              }}>
+                <Text style={textsStyle.subtitle_2}>{device.name}</Text>
+              </Card>
+            )
+          }
         </ListView>
     </View>
-    <FloatButton icon="link" theme="secondary" onPress={() => navigation.navigate("Select_Wifi")} />
-    </>
   )
 }

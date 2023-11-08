@@ -1,14 +1,16 @@
-import { useMemo, useState } from "react"
-import { PermissionsAndroid, Platform } from "react-native";
 import { BleManager, Device } from "react-native-ble-plx"
-import * as ExpoDevice from "expo-device";
+
 const bleManager = new BleManager();
 
-export function ScannBluetooths(){
+export function ScanBluetooths(devices: Array<Device>, setDevices: (devices: Array<Device>) => void) {
     bleManager.startDeviceScan(
         null, null,
-        (error,devices) =>{
-            console.log(devices?.name)
+        (error,device) =>{
+            if(error) return
+            if(device && device.name) {
+                if(devices.find((d) => d.name === device.name)) return
+                setDevices([...devices, device])
+            }
         }
     )
 }
