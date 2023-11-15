@@ -4,9 +4,8 @@ import { colors, textsStyle, viewsStyle } from "../styles"
 import Pulse from "@components/animated/Pulse"
 import ListView from "@components/ListView"
 import Card from "@components/Card"
-import FloatButton from "@components/FloatButton"
 import { PageProps } from "../types"
-import { ScanBluetooths } from "../configs/Bluetooth"
+import BaseConnection from "../services/esp32/BaseConnection"
 import { useEffect, useState } from "react"
 import { Device } from "react-native-ble-plx"
 
@@ -38,10 +37,17 @@ const pulseStyle = StyleSheet.create({
 export default function SelectACS({navigation}:PageProps) {
   const [devices, setDevices] = useState<Array<Device>>([])
 
+  function handleScanBluetooths(device: Device) {
+    if(!device.isConnectable) return
+    if(!device.name?.startsWith("ACS")) return
+    if (devices.find(d => d.id === device.id)) return
+      setDevices([device, ...devices])
+  }
+
   useEffect(() => {
-    ScanBluetooths(devices, setDevices)
+    BaseConnection.ScanBluetooths(handleScanBluetooths)
     console.log(devices.map(device => device.name))
-  }, [])
+  }, [devices])
 
   return(
     <View style={[viewsStyle.content, { alignItems: "center" }]}>
@@ -63,9 +69,11 @@ export default function SelectACS({navigation}:PageProps) {
           }
           {
             devices.map((device, index) =>
-              <Card key={index} style={{ paddingVertical: 10, marginBottom: 20 }} opacity={0.5} onPress={() => {
-                device.connect()
-                navigation.navigate("Loader", { device })
+              <Card key={index} style={{ paddingVertical: 10, marginBottom: 20 }} opacity={0.5} onPress={async () => {
+                await BaseConnection.Connect(device).then(async () => {
+                  await BaseConnection.Send({ hello: "world" })
+                  await BaseConnection.Disconnect()
+                })
               }}>
                 <Text style={textsStyle.subtitle_2}>{device.name}</Text>
               </Card>
