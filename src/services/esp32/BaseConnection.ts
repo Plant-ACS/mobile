@@ -33,7 +33,7 @@ export default class BaseConnection {
       if (!this.deviceConnected.isConnected())
         throw new Error("Device is not connected")
       JSON.stringify(data).match(/.{1,20}/g)?.map(async (dataPacket) => {
-        this.characteristics[0][0].writeWithResponse(JSON.stringify(data))
+        this.characteristics[0][0].writeWithResponse(dataPacket)
       })
 
       return true
