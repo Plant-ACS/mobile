@@ -1,10 +1,9 @@
-import { BleManager, Characteristic, Device } from "react-native-ble-plx"
+import { BleManager, Device } from "react-native-ble-plx"
 import { encode, decode } from "base-64"
 
 export default class BaseConnection {
   private static bleManager = new BleManager()
   private static deviceConnected: Device | null = null
-  private static characteristics: Characteristic[][] = []
 
   public static async Connect(device: Device) {
     try {
@@ -58,27 +57,23 @@ export default class BaseConnection {
     }
   }
 
-  public static Read(): Object {
+  public static async Read(): Promise<Object> {
     try {
       if (!this.deviceConnected)
         throw new Error("No device connected")
       let result = ""
+      
+      do {
+        await this.deviceConnected.readCharacteristicForService(
+          this.deviceConnected.serviceUUIDs!![2],
+          this.deviceConnected.serviceUUIDs!![0]
+        ).then((data) => {
+          console.log(decode(data.value!!))
+          result += decode(data.value!!)
+        })
+      }
+      while (result.match(/{/g)!!.length !== result.match(/}/g)!!.length)
 
-      this.deviceConnected.monitorCharacteristicForService(
-        this.deviceConnected.serviceUUIDs!![2],
-        this.deviceConnected.serviceUUIDs!![0],
-        (error, characteristic) => {
-          if (error) {
-            throw error
-          }
-          console.log(characteristic?.value)
-          if (characteristic) {
-              result += decode(characteristic.value!!)
-          }
-        }
-      )
-
-      while (result.match(/{/g)?.length !== result.match(/}/g)?.length);
       return result
     } catch (error) {
       throw error
