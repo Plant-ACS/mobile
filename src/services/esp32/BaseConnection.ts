@@ -1,4 +1,5 @@
 import { BleManager, Characteristic, Device } from "react-native-ble-plx"
+import { encode, decode } from "base-64"
 
 export default class BaseConnection {
   private static bleManager = new BleManager()
@@ -10,16 +11,26 @@ export default class BaseConnection {
       BaseConnection.bleManager.stopDeviceScan()
       await BaseConnection.bleManager.connectToDevice(device.id).then(async (device) => {
         this.deviceConnected = device
-        await this.deviceConnected.discoverAllServicesAndCharacteristics()
-        while (!this.deviceConnected.isConnected())
-        device.services()
-          .then( async (services) => {
-            for(const service of services)
-              service.characteristics().then((characteristic) => {
-                this.characteristics = [...this.characteristics, characteristic]
-              })
-          })
-        })
+        await this.deviceConnected.discoverAllServicesAndCharacteristics();
+
+        // Encontre o serviço BLE pelo UUID
+        const service = (await this.deviceConnected.services())[2];
+
+        if (service) {
+          // Encontre as características do serviço
+          const characteristics = await service.characteristics();
+
+          this.deviceConnected.serviceUUIDs = [...characteristics.map((characteristic) => characteristic.uuid), service.uuid]
+          console.log('Service UUID:', this.deviceConnected.serviceUUIDs);
+
+          // Agora, você pode interagir com as características
+          for (const characteristic of characteristics) {
+            console.log('Characteristic UUID:', characteristic.uuid);
+          }
+        } else {
+          throw new Error('Service not found');
+        }
+      })
     } catch (error) {
       throw error
     }
@@ -33,7 +44,11 @@ export default class BaseConnection {
       if (!this.deviceConnected.isConnected())
         throw new Error("Device is not connected")
       JSON.stringify(data).match(/.{1,20}/g)?.map(async (dataPacket) => {
-        this.characteristics[0][0].writeWithResponse(dataPacket)
+        this.deviceConnected?.writeCharacteristicWithResponseForService(
+          this.deviceConnected.serviceUUIDs!![2],
+          this.deviceConnected.serviceUUIDs!![1],
+          encode(dataPacket)
+        )
       })
 
       return true
@@ -50,20 +65,21 @@ export default class BaseConnection {
       let result = ""
 
       this.deviceConnected.monitorCharacteristicForService(
+        this.deviceConnected.serviceUUIDs!![2],
         this.deviceConnected.serviceUUIDs!![0],
-        this.deviceConnected.serviceUUIDs!![1],
         (error, characteristic) => {
           if (error) {
             throw error
           }
+          console.log(characteristic?.value)
           if (characteristic) {
-              result += characteristic.value
+              result += decode(characteristic.value!!)
           }
         }
       )
 
       while (result.match(/{/g)?.length !== result.match(/}/g)?.length);
-      return JSON.parse(result)
+      return result
     } catch (error) {
       throw error
     }

@@ -8,6 +8,7 @@ import { PageProps } from "../types"
 import BaseConnection from "../services/esp32/BaseConnection"
 import { useEffect, useState } from "react"
 import { Device } from "react-native-ble-plx"
+import Button from "@components/Button"
 
 
 const pulseStyle = StyleSheet.create({
@@ -71,15 +72,19 @@ export default function SelectACS({navigation}:PageProps) {
             devices.map((device, index) =>
               <Card key={index} style={{ paddingVertical: 10, marginBottom: 20 }} opacity={0.5} onPress={async () => {
                 await BaseConnection.Connect(device).then(async () => {
-                  await BaseConnection.Send({ hello: "world" })
-                  await BaseConnection.Disconnect()
+                  await BaseConnection.Send(JSON.stringify({ test: "hi" }))
+                  console.log(await BaseConnection.Read())
+
                 })
+
+                // await BaseConnection.Disconnect()
               }}>
                 <Text style={textsStyle.subtitle_2}>{device.name}</Text>
               </Card>
             )
           }
         </ListView>
+        <Button style={{ marginTop: 20 }} onPress={() => setDevices([])} text={""}><Text>Reload</Text></Button>
     </View>
   )
 }
