@@ -72,8 +72,8 @@ export default function SelectACS({navigation}:PageProps) {
             devices.map((device, index) =>
               <Card key={index} style={{ paddingVertical: 10, marginBottom: 20 }} opacity={0.5} onPress={async () => {
                 await BaseConnection.Connect(device).then(async () => {
-                  await BaseConnection.Send(JSON.stringify({ test: "hi" }))
-                  console.log(await BaseConnection.Read())
+                  await BaseConnection.Send({ name: "list-wifi", data: {}})
+                  // console.log(await BaseConnection.Read())
 
                 })
 
