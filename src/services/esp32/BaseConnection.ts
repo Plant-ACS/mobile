@@ -1,9 +1,10 @@
 import { BleManager, Device } from "react-native-ble-plx"
-import { encode, decode } from "base-64"
+import base64, { encode, decode } from "base-64"
 
 export default class BaseConnection {
   private static bleManager = new BleManager()
   private static deviceConnected: Device | null = null
+  private static msg: string = ""
 
   public static async Connect(device: Device) {
     try {
@@ -12,27 +13,47 @@ export default class BaseConnection {
         this.deviceConnected = device
         await this.deviceConnected.discoverAllServicesAndCharacteristics();
 
-        // Encontre o serviço BLE pelo UUID
-        const service = (await this.deviceConnected.services())[2];
-
-        if (service) {
-          // Encontre as características do serviço
-          const characteristics = await service.characteristics();
-
-          this.deviceConnected.serviceUUIDs = [...characteristics.map((characteristic) => characteristic.uuid), service.uuid]
-          console.log('Service UUID:', this.deviceConnected.serviceUUIDs);
-
-          // Agora, você pode interagir com as características
-          for (const characteristic of characteristics) {
-            console.log('Characteristic UUID:', characteristic.uuid);
-          }
-        } else {
-          throw new Error('Service not found');
-        }
+        await this.initializeCharacteristics()        
+        await this.startMonitor()
       })
     } catch (error) {
       throw error
     }
+  }
+
+  private static async initializeCharacteristics() {
+    if (!this.deviceConnected)
+      throw new Error('No device connected');
+    const service = (await this.deviceConnected.services())[2];
+
+    if (service) {
+      const characteristics = await service.characteristics();
+      this.deviceConnected.serviceUUIDs = [...characteristics.map((characteristic) => characteristic.uuid), service.uuid]
+      
+    } else {
+      throw new Error('Service not found');
+    }
+  }
+  
+  public static async startMonitor() {
+    if (!this.deviceConnected)
+      throw new Error("No device connected")
+    this.deviceConnected.monitorCharacteristicForService(
+      this.deviceConnected.serviceUUIDs!![2],
+      this.deviceConnected.serviceUUIDs!![0],
+      (error, characteristic) => {
+        if (error) {
+          console.error('Error during monitoring:', error);
+          return;
+        }
+        var base64 = require('base-64');
+        if (characteristic) {
+          console.log('Received data: ' + base64.decode(characteristic.value!!));
+          console.log('Received data: ' + decode(characteristic.value!!));
+          this.msg += decode(characteristic.value!!);
+        }
+      }
+    )
   }
 
   public static async Send(data: Object): Promise<boolean> {
@@ -58,26 +79,23 @@ export default class BaseConnection {
   }
 
   public static async Read(): Promise<Object> {
-    try {
-      if (!this.deviceConnected)
-        throw new Error("No device connected")
-      let result = ""
-      
-      do {
-        await this.deviceConnected.readCharacteristicForService(
-          this.deviceConnected.serviceUUIDs!![2],
-          this.deviceConnected.serviceUUIDs!![0]
-        ).then((data) => {
-          console.log(decode(data.value!!))
-          result += decode(data.value!!)
-        })
-      }
-      while (result.match(/{/g)!!.length !== result.match(/}/g)!!.length)
 
-      return result
-    } catch (error) {
-      throw error
-    }
+    return new Promise((resolve, reject) => {
+      let initalLength
+      let finalLength
+      do {
+        const intial = this.msg.match(/{/g)
+        const final = this.msg.match(/}/g)
+        initalLength = !intial? 0 : intial.length
+        finalLength = !final? -1 : final.length
+
+      } while(initalLength !== finalLength);
+      
+      const data = JSON.parse(this.msg)
+      console.log(this.msg)
+      this.msg = ""
+      resolve(data)
+    })
   }
 
   public static async Disconnect() {
