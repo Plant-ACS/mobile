@@ -1,11 +1,12 @@
 import { buttonsStyle, colors, textsStyle } from "../styles"
-import { TouchableOpacity, Text, View, StyleProp, ViewStyle } from "react-native"
+import { TouchableOpacity, Text, View, StyleProp, ViewStyle, TextStyle } from "react-native"
 
 export interface ButtonProps {
     text: string,
     theme?: "primary" | "secondary",
     isHover?: boolean,
     style?: StyleProp<ViewStyle>,
+    styleText?: StyleProp<TextStyle>,
     onPress: () => void,
     children?: React.ReactNode
 }
@@ -27,7 +28,7 @@ export default function Button(props: ButtonProps) {
             onPress={props.onPress}
         >
             <View style={buttonsStyle.button_children}>{props.children}</View>
-            <Text style={[textsStyle.subtitle_2, {color: colors[colorText]}]}>{props.text}</Text>
+            <Text style={[textsStyle.subtitle_2, {color: colors[colorText], fontWeight: "700"}, props.styleText]}>{props.text}</Text>
         </TouchableOpacity>
     )
 

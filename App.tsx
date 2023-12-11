@@ -19,6 +19,7 @@ import CalibratingSensors from "@pages/CalibratingSensors";
 import Splash from "@pages/Splash";
 import Register from "@pages/Register";
 import Loader from "@pages/Loader";
+import ManualIrrigation from "@pages/ManualIrrigation";
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -57,6 +58,7 @@ export default function App() {
           <Stack.Screen name="Settings_Plantation" component={SettingsPlantation} />
           <Stack.Screen name="Settings_Device" component={SettingsDevice} />
           <Stack.Screen name="Calibating_Sensors" component={CalibratingSensors} />
+          <Stack.Screen name="ManualIrrigation" component={ManualIrrigation} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

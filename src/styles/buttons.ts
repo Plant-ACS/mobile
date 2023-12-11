@@ -13,9 +13,8 @@ export const buttonsStyle = StyleSheet.create({
     marginBottom: 20,
   },
   button_children: {
-    position: "absolute",
-    left: 10,
-},
+    margin: "auto"
+  },
   checkBox: {
     width: 35,
     height: 35,

@@ -72,21 +72,15 @@ export default function SelectACS({navigation}:PageProps) {
             devices.map((device, index) =>
               <Card key={index} style={{ paddingVertical: 10, marginBottom: 20 }} opacity={0.5} onPress={async () => {
                 await BaseConnection.Connect(device).then(async () => {
-                  await BaseConnection.Send({ name: "list-wifi", data: {}})
-                  // console.log(await BaseConnection.Read())
-
+                  navigation.navigate("ManualIrrigation")
                 })
-
-                // await BaseConnection.Disconnect()
               }}>
                 <Text style={textsStyle.subtitle_2}>{device.name}</Text>
               </Card>
             )
           }
         </ListView>
-        <Button style={{ marginTop: 20 }} onPress={ async () => await BaseConnection.Send({name: "start", data: {}})} text={""}><Text>Start</Text></Button>
-        <Button style={{ marginTop: 20 }} onPress={ async () => await BaseConnection.Send({name: "end", data: {}})} text={""}><Text>End</Text></Button>
-        <Button style={{ marginTop: 20 }} onPress={() => setDevices([])} text={""}><Text>Reload</Text></Button>
+        <Button style={{ marginTop: 20 }} onPress={() => setDevices([])} text={"Reload"}></Button>
     </View>
   )
 }
