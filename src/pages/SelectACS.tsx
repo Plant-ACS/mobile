@@ -84,6 +84,8 @@ export default function SelectACS({navigation}:PageProps) {
             )
           }
         </ListView>
+        <Button style={{ marginTop: 20 }} onPress={ async () => await BaseConnection.Send({name: "start", data: {}})} text={""}><Text>Start</Text></Button>
+        <Button style={{ marginTop: 20 }} onPress={ async () => await BaseConnection.Send({name: "end", data: {}})} text={""}><Text>End</Text></Button>
         <Button style={{ marginTop: 20 }} onPress={() => setDevices([])} text={""}><Text>Reload</Text></Button>
     </View>
   )
